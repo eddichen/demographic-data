@@ -6,8 +6,11 @@ class App extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      value: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +32,10 @@ class App extends Component {
       );
   }
 
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
   render() {
     const { error, isLoaded, items } = this.state;
 
@@ -38,11 +45,13 @@ class App extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
-          {items.map(item => (
-            <li>{item}</li>
-          ))}
-        </ul>
+        <div>
+          <select value={this.state.value} onChange={this.handleChange}>
+            {items.map(item => (
+              <option>{item}</option>
+            ))}
+          </select>
+        </div>
       );
     }
   }
