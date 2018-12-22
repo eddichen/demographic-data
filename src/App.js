@@ -6,8 +6,9 @@ class App extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: [],
-      value: ""
+      fields: [],
+      selectedField: "",
+      data: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,7 +21,7 @@ class App extends Component {
         result => {
           this.setState({
             isLoaded: true,
-            items: result
+            fields: result
           });
         },
         error => {
@@ -33,11 +34,29 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ selectedField: event.target.value });
+    this.returnData(event.target.value);
+  }
+
+  returnData(activeField) {
+    fetch(`https://birdie-test-thibault-henry.herokuapp.com/api/${activeField}`)
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            data: result
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, fields } = this.state;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -46,9 +65,10 @@ class App extends Component {
     } else {
       return (
         <div>
-          <select value={this.state.value} onChange={this.handleChange}>
-            {items.map(item => (
-              <option>{item}</option>
+          <select value={this.state.selectedField} onChange={this.handleChange}>
+            <option value="">select a field</option>
+            {fields.map((field, index) => (
+              <option key={index}>{field}</option>
             ))}
           </select>
         </div>
