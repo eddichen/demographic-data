@@ -8,7 +8,7 @@ class App extends Component {
       isLoaded: false,
       fields: [],
       selectedField: "",
-      data: []
+      items: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,7 @@ class App extends Component {
       .then(
         result => {
           this.setState({
-            data: result
+            items: result
           });
         },
         error => {
@@ -56,7 +56,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, isLoaded, fields } = this.state;
+    const { error, isLoaded, fields, items } = this.state;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -71,6 +71,23 @@ class App extends Component {
               <option key={index}>{field}</option>
             ))}
           </select>
+
+          <table>
+            <tr>
+              <td>#</td>
+              <td>Field</td>
+              <td>Count</td>
+              <td>Average Age</td>
+            </tr>
+            {items.map((item, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.field}</td>
+                <td>{item.count}</td>
+                <td>{item.average_age}</td>
+              </tr>
+            ))}
+          </table>
         </div>
       );
     }
