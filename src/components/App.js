@@ -35,16 +35,17 @@ class App extends Component {
 
   handleChange(event) {
     this.setState({ selectedField: event.target.value });
-    this.returnData(event.target.value);
+    this.getData(event.target.value);
   }
 
-  returnData(activeField) {
+  getData(activeField) {
     fetch(`https://birdie-test-thibault-henry.herokuapp.com/api/${activeField}`)
       .then(res => res.json())
       .then(
         result => {
+          let sortedData = this.sortByCount(result);
           this.setState({
-            items: result
+            items: sortedData
           });
         },
         error => {
@@ -53,6 +54,13 @@ class App extends Component {
           });
         }
       );
+  }
+
+  sortByCount(data) {
+    const unsortedData = data;
+    return unsortedData.sort((a, b) => {
+      return b.count - a.count;
+    });
   }
 
   render() {
