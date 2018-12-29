@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
+import ResultDataCount from "./ResultDataCount";
 
 class App extends Component {
   constructor(props) {
@@ -10,10 +11,10 @@ class App extends Component {
       isLoaded: false,
       fields: [],
       selectedField: "",
-      items: []
+      items: [],
+      resultDataCount: 0
     };
 
-    this.resultDataCount = 0;
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -46,11 +47,11 @@ class App extends Component {
       .then(res => res.json())
       .then(
         result => {
-          this.resultDataCount = result.length;
           let sortedData = this.sortByCount(result);
-          let trimmedData = this.trimResults(sortedData);
+          let trimmedData = this.trimResults(sortedData, result.length);
           this.setState({
-            items: trimmedData
+            items: trimmedData,
+            resultDataCount: result.length
           });
         },
         error => {
@@ -68,9 +69,9 @@ class App extends Component {
     });
   }
 
-  trimResults(data) {
+  trimResults(data, resultLength) {
     const fullResults = data;
-    if (this.resultDataCount > 100) {
+    if (resultLength > 100) {
       let trimmedResults = [];
 
       for (let i = 0; i <= 99; i++) {
@@ -82,7 +83,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, isLoaded, fields, items } = this.state;
+    const { error, isLoaded } = this.state;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -96,8 +97,8 @@ class App extends Component {
             selectedField={this.state.selectedField}
             handleChange={this.handleChange}
           />
+          <ResultDataCount resultDataCount={this.state.resultDataCount} />
           <ResultsTable items={this.state.items} />
-          <p>{this.resultDataCount} results</p>
         </div>
       );
     }
