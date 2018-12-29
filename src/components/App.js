@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FieldSelect from "./FieldSelect";
 
 class App extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class App extends Component {
       items: []
     };
 
+    this.resultDataCount = 0;
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -43,9 +45,11 @@ class App extends Component {
       .then(res => res.json())
       .then(
         result => {
+          this.resultDataCount = result.length;
           let sortedData = this.sortByCount(result);
+          let trimmedData = this.trimResults(sortedData);
           this.setState({
-            items: sortedData
+            items: trimmedData
           });
         },
         error => {
@@ -63,6 +67,19 @@ class App extends Component {
     });
   }
 
+  trimResults(data) {
+    const fullResults = data;
+    if (this.resultDataCount > 100) {
+      let trimmedResults = [];
+
+      for (let i = 1; i <= 100; i++) {
+        trimmedResults.push(fullResults[i]);
+      }
+      return trimmedResults;
+    }
+    return fullResults;
+  }
+
   render() {
     const { error, isLoaded, fields, items } = this.state;
 
@@ -73,12 +90,11 @@ class App extends Component {
     } else {
       return (
         <div>
-          <select value={this.state.selectedField} onChange={this.handleChange}>
-            <option value="">select a field</option>
-            {fields.map((field, index) => (
-              <option key={index}>{field}</option>
-            ))}
-          </select>
+          <FieldSelect
+            fields={this.state.fields}
+            selectedField={this.state.selectedField}
+            handleChange={this.handleChange}
+          />
 
           <table>
             <tr>
@@ -96,6 +112,7 @@ class App extends Component {
               </tr>
             ))}
           </table>
+          <p>{this.resultDataCount}</p>
         </div>
       );
     }
