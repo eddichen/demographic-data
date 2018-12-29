@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FieldSelect from "./FieldSelect";
+import ResultsTable from "./ResultsTable";
 
 class App extends Component {
   constructor(props) {
@@ -95,23 +96,7 @@ class App extends Component {
             selectedField={this.state.selectedField}
             handleChange={this.handleChange}
           />
-
-          <table>
-            <tr>
-              <td>#</td>
-              <td>Field</td>
-              <td>Count</td>
-              <td>Average Age</td>
-            </tr>
-            {items.map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.field}</td>
-                <td>{item.count}</td>
-                <td>{item.average_age}</td>
-              </tr>
-            ))}
-          </table>
+          <ResultsTable items={this.state.items} />
           <p>{this.resultDataCount}</p>
         </div>
       );
