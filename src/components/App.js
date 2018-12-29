@@ -73,7 +73,7 @@ class App extends Component {
     if (this.resultDataCount > 100) {
       let trimmedResults = [];
 
-      for (let i = 1; i <= 100; i++) {
+      for (let i = 0; i <= 99; i++) {
         trimmedResults.push(fullResults[i]);
       }
       return trimmedResults;
@@ -97,7 +97,7 @@ class App extends Component {
             handleChange={this.handleChange}
           />
           <ResultsTable items={this.state.items} />
-          <p>{this.resultDataCount}</p>
+          <p>{this.resultDataCount} results</p>
         </div>
       );
     }
