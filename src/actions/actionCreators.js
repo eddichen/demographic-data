@@ -1,11 +1,10 @@
 import fetch from "cross-fetch";
 
 //select a field
-export function selectedField(selectedField, index) {
+export function selectedField(selectedField) {
   return {
     type: "SET_SELECTED_FIELD",
-    selectedField,
-    index
+    selectedField
   };
 }
 //request fields

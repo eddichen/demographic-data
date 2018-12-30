@@ -1,12 +1,9 @@
-function selectedField(state = [], action, index) {
+function selectedField(state = { value: "" }, action, index = 0) {
   switch (action.type) {
     case "SET_SELECTED_FIELD":
-      console.log("SET_SELECTED_FIELD");
-      return [
-        ...state.slice(0, index),
-        { ...state[index], selectedField: action.selectedField },
-        ...state.slice(index + 1)
-      ];
+      return Object.assign({}, state, {
+        value: action.selectedField
+      });
     default:
       return state;
   }

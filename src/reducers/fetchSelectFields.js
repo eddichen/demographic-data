@@ -1,4 +1,4 @@
-function requestFields(
+function fetchSelectFields(
   state = {
     isFetching: false,
     fields: []
@@ -13,11 +13,11 @@ function requestFields(
     case "RECEIVE_FIELDS":
       return Object.assign({}, state, {
         isFetching: false,
-        fields: action
+        fields: action.fields
       });
     default:
       return state;
   }
 }
 
-export default requestFields;
+export default fetchSelectFields;

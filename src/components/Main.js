@@ -4,7 +4,7 @@ import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
 import ResultDataCount from "./ResultDataCount";
 import store from "../store";
-import { fetchFields } from "../actions/actionCreators";
+import { fetchFields, selectedField } from "../actions/actionCreators";
 
 class Main extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class Main extends Component {
   }
 
   handleChange(event) {
+    store.dispatch(selectedField(event.target.value));
     // this.store.dispatch({
     //   type: "SET_SELECTED_FIELD",
     //   selectedField: event.target.value,
@@ -84,7 +85,11 @@ class Main extends Component {
     // } else {
     return (
       <div>
-        <FieldSelect />
+        <FieldSelect
+          fields={this.props.fields}
+          selectedField={this.props.selectedField}
+          handleChange={this.handleChange}
+        />
         {/*<FieldSelect
           fields={store.fields}
           selectedField={this.state.selectedField}

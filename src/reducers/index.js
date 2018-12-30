@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
+import fetchSelectFields from "./fetchSelectFields";
 import selectedField from "./selectedField";
-import requestFields from "./requestFields";
 
-const rootReducer = combineReducers({ requestFields });
+const rootReducer = combineReducers({ fetchSelectFields, selectedField });
 
 export default rootReducer;

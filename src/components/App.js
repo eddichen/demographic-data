@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 import {
   fetchFields,
   receiveFields,
-  requestFields
+  requestFields,
+  selectedField
 } from "../actions/actionCreators";
 
 import Main from "./Main";
 
 function mapStateToProps(state) {
   return {
-    fields: state.fields,
+    fields: state.fetchSelectFields.fields,
     selectedField: state.selectedField
   };
 }
@@ -20,6 +21,7 @@ function mapDispatchToProps(dispatch) {
     fetchFields,
     requestFields,
     receiveFields,
+    selectedField,
     dispatch
   );
 }
