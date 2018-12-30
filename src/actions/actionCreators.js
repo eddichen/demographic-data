@@ -22,6 +22,7 @@ export function receiveFields(fields) {
   };
 }
 
+//fetch fields
 export function fetchFields() {
   return function(dispatch) {
     dispatch(requestFields());

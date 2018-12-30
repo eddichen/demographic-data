@@ -1,6 +1,10 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { receiveFields } from "../actions/actionCreators";
+import {
+  fetchFields,
+  receiveFields,
+  requestFields
+} from "../actions/actionCreators";
 
 import Main from "./Main";
 
@@ -12,7 +16,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(receiveFields, dispatch);
+  return bindActionCreators(
+    fetchFields,
+    requestFields,
+    receiveFields,
+    dispatch
+  );
 }
 
 const App = connect(

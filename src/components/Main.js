@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
 import ResultDataCount from "./ResultDataCount";
+import store from "../store";
+import { fetchFields } from "../actions/actionCreators";
 
 class Main extends Component {
   constructor(props) {
@@ -26,6 +28,10 @@ class Main extends Component {
     // });
     //this.setState({ selectedField: event.target.value });
     //this.getData(event.target.value);
+  }
+
+  componentDidMount() {
+    store.dispatch(fetchFields());
   }
 
   getData(activeField) {
