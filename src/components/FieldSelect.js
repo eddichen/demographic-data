@@ -3,15 +3,16 @@ import React, { Component } from "react";
 class FieldSelect extends Component {
   render() {
     return (
-      <select
-        value={this.props.selectedField}
-        onChange={this.props.handleChange}
-      >
-        <option value="">select a field</option>
-        {this.props.fields.map((field, index) => (
-          <option key={index}>{field}</option>
-        ))}
-      </select>
+      <p>field select</p>
+      // <select
+      //   value={this.props.selectedField}
+      //   onChange={this.props.handleChange}
+      // >
+      //   <option value="">select a field</option>
+      //   {this.props.fields.map((field, index) => (
+      //     <option key={index}>{field}</option>
+      //   ))}
+      // </select>
     );
   }
 }
