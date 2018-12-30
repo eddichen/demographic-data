@@ -22,12 +22,6 @@ class Main extends Component {
 
   handleChange(event) {
     store.dispatch(selectedField(event.target.value));
-    // this.store.dispatch({
-    //   type: "SET_SELECTED_FIELD",
-    //   selectedField: event.target.value,
-    //   index: 0
-    // });
-    //this.setState({ selectedField: event.target.value });
     //this.getData(event.target.value);
   }
 
@@ -76,30 +70,26 @@ class Main extends Component {
   }
 
   render() {
-    //const { error, isLoaded } = this.store;
+    const error = this.props.error;
+    const isFetching = this.props.isFetching;
 
-    // if (error) {
-    //   return <div>Error: {error.message}</div>;
-    // } else if (!isLoaded) {
-    //   return <div>Loading...</div>;
-    // } else {
-    return (
-      <div>
-        <FieldSelect
-          fields={this.props.fields}
-          selectedField={this.props.selectedField}
-          handleChange={this.handleChange}
-        />
-        {/*<FieldSelect
-          fields={store.fields}
-          selectedField={this.state.selectedField}
-          handleChange={this.handleChange}
-        />
-        {/*<ResultDataCount resultDataCount={this.state.resultDataCount} />
-        <ResultsTable items={this.state.items} /> */}
-      </div>
-    );
-    //}
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (isFetching) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div>
+          <FieldSelect
+            fields={this.props.fields}
+            selectedField={this.props.selectedField}
+            handleChange={this.handleChange}
+          />
+          {/*<ResultDataCount resultDataCount={this.state.resultDataCount} />
+          <ResultsTable items={this.state.items} /> */}
+        </div>
+      );
+    }
   }
 }
 

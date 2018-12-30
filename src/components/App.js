@@ -12,6 +12,8 @@ import Main from "./Main";
 function mapStateToProps(state) {
   return {
     fields: state.fetchSelectFields.fields,
+    error: state.fetchSelectFields.error,
+    isFetching: state.fetchSelectFields.isFetching,
     selectedField: state.selectedField
   };
 }

@@ -1,7 +1,8 @@
 function fetchSelectFields(
   state = {
     isFetching: false,
-    fields: []
+    fields: [],
+    error: {}
   },
   action
 ) {
@@ -13,7 +14,8 @@ function fetchSelectFields(
     case "RECEIVE_FIELDS":
       return Object.assign({}, state, {
         isFetching: false,
-        fields: action.fields
+        fields: action.fields,
+        error: action.error
       });
     default:
       return state;

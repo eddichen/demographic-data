@@ -14,10 +14,11 @@ export function requestFields() {
   };
 }
 //receive fields
-export function receiveFields(fields) {
+export function receiveFields(fields, error) {
   return {
     type: "RECEIVE_FIELDS",
-    fields
+    fields,
+    error
   };
 }
 
@@ -30,8 +31,11 @@ export function fetchFields() {
         response => {
           return response.json();
         },
-        error => console.log("An error occurred", error)
+        error => {
+          return error;
+        }
       )
-      .then(json => dispatch(receiveFields(json)));
+      .then(json => dispatch(receiveFields(json)))
+      .catch(error => dispatch(receiveFields([], error)));
   };
 }
