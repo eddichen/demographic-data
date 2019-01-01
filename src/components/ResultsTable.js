@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import ResultCount from "./ResultCount";
+import styled from "styled-components";
+
+const ResultContainer = styled.div`
+  text-align: center;
+`;
+
+const ResultTable = styled.table``;
 
 class ResultsTable extends Component {
   render() {
     return (
-      <div>
+      <ResultContainer>
         <ResultCount resultCount={this.props.resultCount} />
-        <table>
+        <ResultTable>
           <tr>
             <td>#</td>
             <td>Field</td>
@@ -21,8 +28,8 @@ class ResultsTable extends Component {
               <td>{item.average_age}</td>
             </tr>
           ))}
-        </table>
-      </div>
+        </ResultTable>
+      </ResultContainer>
     );
   }
 }

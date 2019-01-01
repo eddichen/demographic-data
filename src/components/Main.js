@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
 import store from "../store";
@@ -8,6 +7,7 @@ import {
   selectedField,
   fetchFieldData
 } from "../actions/actionCreators";
+import "../styles/global.css";
 
 class Main extends Component {
   constructor(props) {
