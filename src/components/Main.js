@@ -4,7 +4,11 @@ import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
 import ResultDataCount from "./ResultDataCount";
 import store from "../store";
-import { fetchFields, selectedField } from "../actions/actionCreators";
+import {
+  fetchFields,
+  selectedField,
+  fetchFieldData
+} from "../actions/actionCreators";
 
 class Main extends Component {
   constructor(props) {
@@ -22,31 +26,11 @@ class Main extends Component {
 
   handleChange(event) {
     store.dispatch(selectedField(event.target.value));
-    //this.getData(event.target.value);
+    store.dispatch(fetchFieldData(event.target.value));
   }
 
   componentDidMount() {
     store.dispatch(fetchFields());
-  }
-
-  getData(activeField) {
-    fetch(`https://birdie-test-thibault-henry.herokuapp.com/api/${activeField}`)
-      .then(res => res.json())
-      .then(
-        result => {
-          let sortedData = this.sortByCount(result);
-          let trimmedData = this.trimResults(sortedData, result.length);
-          this.setState({
-            items: trimmedData,
-            resultDataCount: result.length
-          });
-        },
-        error => {
-          this.setState({
-            error
-          });
-        }
-      );
   }
 
   sortByCount(data) {
@@ -85,8 +69,10 @@ class Main extends Component {
             selectedField={this.props.selectedField}
             handleChange={this.handleChange}
           />
-          {/*<ResultDataCount resultDataCount={this.state.resultDataCount} />
-          <ResultsTable items={this.state.items} /> */}
+          {/* <ResultDataCount resultDataCount={this.state.resultDataCount} /> */}
+          {this.props.items.length ? (
+            <ResultsTable items={this.props.items} />
+          ) : null}
         </div>
       );
     }

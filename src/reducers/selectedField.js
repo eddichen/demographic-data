@@ -1,4 +1,4 @@
-function selectedField(state = { value: "" }, action, index = 0) {
+function selectedField(state = { value: "" }, action) {
   switch (action.type) {
     case "SET_SELECTED_FIELD":
       return Object.assign({}, state, {

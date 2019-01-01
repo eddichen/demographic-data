@@ -4,7 +4,8 @@ import {
   fetchFields,
   receiveFields,
   requestFields,
-  selectedField
+  selectedField,
+  fetchFieldData
 } from "../actions/actionCreators";
 
 import Main from "./Main";
@@ -14,7 +15,8 @@ function mapStateToProps(state) {
     fields: state.fetchSelectFields.fields,
     error: state.fetchSelectFields.error,
     isFetching: state.fetchSelectFields.isFetching,
-    selectedField: state.selectedField
+    selectedField: state.selectedField,
+    items: state.fetchFieldData.items
   };
 }
 
@@ -24,6 +26,7 @@ function mapDispatchToProps(dispatch) {
     requestFields,
     receiveFields,
     selectedField,
+    fetchFieldData,
     dispatch
   );
 }
