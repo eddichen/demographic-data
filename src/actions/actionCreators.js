@@ -44,7 +44,7 @@ export function requestFieldData() {
     type: "REQUEST_FIELD_DATA"
   };
 }
-//receive fields
+//receive field data
 export function receiveFieldData(items, error) {
   return {
     type: "RECEIVE_FIELD_DATA",
