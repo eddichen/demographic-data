@@ -2,6 +2,7 @@ function fetchFieldData(
   state = {
     isFetching: false,
     items: [],
+    resultCount: 0,
     error: {}
   },
   action
@@ -15,6 +16,7 @@ function fetchFieldData(
       return Object.assign({}, state, {
         isFetching: false,
         items: action.items,
+        resultCount: action.resultCount,
         error: action.error
       });
     default:

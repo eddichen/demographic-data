@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
-import ResultDataCount from "./ResultDataCount";
 import store from "../store";
 import {
   fetchFields,
@@ -40,9 +39,11 @@ class Main extends Component {
             selectedField={this.props.selectedField}
             handleChange={this.handleChange}
           />
-          {/* <ResultDataCount resultDataCount={this.state.resultDataCount} /> */}
           {this.props.items.length ? (
-            <ResultsTable items={this.props.items} />
+            <ResultsTable
+              items={this.props.items}
+              resultCount={this.props.resultCount}
+            />
           ) : null}
         </div>
       );

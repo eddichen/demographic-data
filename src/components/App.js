@@ -16,7 +16,8 @@ function mapStateToProps(state) {
     error: state.fetchSelectFields.error,
     isFetching: state.fetchSelectFields.isFetching,
     selectedField: state.selectedField,
-    items: state.fetchFieldData.items
+    items: state.fetchFieldData.items,
+    resultCount: state.fetchFieldData.resultCount
   };
 }
 

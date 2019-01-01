@@ -45,10 +45,11 @@ export function requestFieldData() {
   };
 }
 //receive field data
-export function receiveFieldData(items, error) {
+export function receiveFieldData(items, resultCount, error) {
   return {
     type: "RECEIVE_FIELD_DATA",
     items,
+    resultCount,
     error
   };
 }
@@ -69,9 +70,11 @@ export function fetchFieldData(field) {
       )
       .then(json => {
         let sortedData = sortByCount(json);
-        dispatch(receiveFieldData(trimResults(sortedData, json.length)));
+        dispatch(
+          receiveFieldData(trimResults(sortedData, json.length), json.length)
+        );
       })
-      .catch(error => dispatch(receiveFieldData({}, error)));
+      .catch(error => dispatch(receiveFieldData({}, 0, error)));
   };
 }
 

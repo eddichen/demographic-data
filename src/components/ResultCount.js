@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class ResultDataCount extends Component {
+class ResultCount extends Component {
   displayResultCount(resultCount) {
     if (resultCount > 100) {
       return `Showing 100 of ${resultCount} results`;
@@ -10,8 +10,8 @@ class ResultDataCount extends Component {
   }
 
   render() {
-    return <p>{this.displayResultCount(this.props.resultDataCount)}</p>;
+    return <p>{this.displayResultCount(this.props.resultCount)}</p>;
   }
 }
 
-export default ResultDataCount;
+export default ResultCount;
