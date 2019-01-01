@@ -68,14 +68,29 @@ export function fetchFieldData(field) {
         }
       )
       .then(json => {
-        dispatch(receiveFieldData(json));
-        //let sortedData = this.sortByCount(result);
-        //let trimmedData = this.trimResults(sortedData, result.length);
-        // this.setState({
-        //   items: trimmedData,
-        //   resultDataCount: result.length
-        // });
+        let sortedData = sortByCount(json);
+        dispatch(receiveFieldData(trimResults(sortedData, json.length)));
       })
       .catch(error => dispatch(receiveFieldData({}, error)));
   };
+}
+
+function sortByCount(data) {
+  const unsortedData = data;
+  return unsortedData.sort((a, b) => {
+    return b.count - a.count;
+  });
+}
+
+function trimResults(data, resultLength) {
+  const fullResults = data;
+  if (resultLength > 100) {
+    let trimmedResults = [];
+
+    for (let i = 0; i <= 99; i++) {
+      trimmedResults.push(fullResults[i]);
+    }
+    return trimmedResults;
+  }
+  return fullResults;
 }

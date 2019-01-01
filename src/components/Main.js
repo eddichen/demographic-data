@@ -13,15 +13,6 @@ import {
 class Main extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   error: null,
-    //   isLoaded: false,
-    //   fields: [],
-    //   selectedField: "",
-    //   items: [],
-    //   resultDataCount: 0
-    // };
-    //this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
@@ -33,34 +24,14 @@ class Main extends Component {
     store.dispatch(fetchFields());
   }
 
-  sortByCount(data) {
-    const unsortedData = data;
-    return unsortedData.sort((a, b) => {
-      return b.count - a.count;
-    });
-  }
-
-  trimResults(data, resultLength) {
-    const fullResults = data;
-    if (resultLength > 100) {
-      let trimmedResults = [];
-
-      for (let i = 0; i <= 99; i++) {
-        trimmedResults.push(fullResults[i]);
-      }
-      return trimmedResults;
-    }
-    return fullResults;
-  }
-
   render() {
     const error = this.props.error;
     const isFetching = this.props.isFetching;
 
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (isFetching) {
+    if (isFetching) {
       return <div>Loading...</div>;
+    } else if (error) {
+      return <div>Error: {error.message}</div>;
     } else {
       return (
         <div>
