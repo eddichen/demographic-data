@@ -7,7 +7,19 @@ import {
   selectedField,
   fetchFieldData
 } from "../actions/actionCreators";
-import "../styles/global.css";
+import styled from "styled-components";
+
+const PageTitle = styled.h1`
+  font-size: 38px;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  letter-spacing: -2px;
+  color: #ff7219;
+
+  @media (min-width: 48em) {
+    font-size: 50px;
+  }
+`;
 
 class Main extends Component {
   constructor(props) {
@@ -34,6 +46,7 @@ class Main extends Component {
     } else {
       return (
         <div>
+          <PageTitle>Demographic Data</PageTitle>
           <FieldSelect
             fields={this.props.fields}
             selectedField={this.props.selectedField}

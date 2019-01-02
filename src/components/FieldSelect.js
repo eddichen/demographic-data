@@ -6,9 +6,13 @@ const SelectWrapper = styled.div`
   border: 1px solid #ccc;
   border-radius: 0px;
   overflow: hidden;
-  width: 50%;
+  width: 90%;
   margin: 0 auto;
   padding 5px 6px;
+
+  @media (min-width: 48em) {
+    width: 50%;
+  }
 
   &:after {
     content: '';
@@ -22,15 +26,17 @@ const SelectWrapper = styled.div`
     border-right: 10px solid transparent;
     border-top: 10px solid #666;
   }
-`;
-const StyledSelect = styled.select`
-  width: 130%;
-  border: none;
-  background: transparent;
-  font-size: 24px;
 
-  &:focus {
-    outline: none;
+  select {
+    width: 130%;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    font-family: "Courier New", Courier, monospace;
+  
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
@@ -38,7 +44,7 @@ class FieldSelect extends Component {
   render() {
     return (
       <SelectWrapper>
-        <StyledSelect
+        <select
           value={this.props.selectedField.value}
           onChange={this.props.handleChange}
         >
@@ -46,7 +52,7 @@ class FieldSelect extends Component {
           {this.props.fields.map((field, index) => (
             <option key={index}>{field}</option>
           ))}
-        </StyledSelect>
+        </select>
       </SelectWrapper>
     );
   }
