@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
+import Loading from "./Loading";
 import store from "../store";
 import {
   fetchFields,
@@ -48,7 +49,7 @@ class Main extends Component {
     const isFetching = this.props.isFetching;
 
     if (isFetching) {
-      return <div>Loading...</div>;
+      return <Loading />;
     } else if (error) {
       return <div>Error: {error.message}</div>;
     } else {
