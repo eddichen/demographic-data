@@ -7,7 +7,19 @@ import {
   selectedField,
   fetchFieldData
 } from "../actions/actionCreators";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: "Courier New", Courier, monospace;
+    color: #1f1f1f;
+    margin: 0 15px 30px;
+
+    @media(min-width: 48em) {
+      margin: 0 30px 60px;
+    }
+  }
+`;
 
 const PageTitle = styled.h1`
   font-size: 38px;
@@ -22,10 +34,6 @@ const PageTitle = styled.h1`
 `;
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleChange(event) {
     store.dispatch(selectedField(event.target.value));
     store.dispatch(fetchFieldData(event.target.value));
@@ -46,6 +54,7 @@ class Main extends Component {
     } else {
       return (
         <div>
+          <GlobalStyle />
           <PageTitle>Demographic Data</PageTitle>
           <FieldSelect
             fields={this.props.fields}
