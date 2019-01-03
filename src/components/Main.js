@@ -3,11 +3,7 @@ import FieldSelect from "./FieldSelect";
 import ResultsTable from "./ResultsTable";
 import Loading from "./Loading";
 import store from "../store";
-import {
-  fetchFields,
-  selectedField,
-  fetchFieldData
-} from "../actions/actionCreators";
+import { fetchFields } from "../actions/actionCreators";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -35,11 +31,6 @@ const PageTitle = styled.h1`
 `;
 
 class Main extends Component {
-  handleChange(event) {
-    store.dispatch(selectedField(event.target.value));
-    store.dispatch(fetchFieldData(event.target.value));
-  }
-
   componentDidMount() {
     store.dispatch(fetchFields());
   }
@@ -60,7 +51,6 @@ class Main extends Component {
           <FieldSelect
             fields={this.props.fields}
             selectedField={this.props.selectedField}
-            handleChange={this.handleChange}
           />
           {this.props.items.length ? (
             <ResultsTable

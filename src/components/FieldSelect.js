@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import store from "../store";
+import { selectedField, fetchFieldData } from "../actions/actionCreators";
 import styled from "styled-components";
 
 const SelectWrapper = styled.div`
@@ -41,12 +43,17 @@ const SelectWrapper = styled.div`
 `;
 
 class FieldSelect extends Component {
+  handleChange(event) {
+    store.dispatch(selectedField(event.target.value));
+    store.dispatch(fetchFieldData(event.target.value));
+  }
+
   render() {
     return (
       <SelectWrapper>
         <select
           value={this.props.selectedField.value}
-          onChange={this.props.handleChange}
+          onChange={this.handleChange}
         >
           <option value="">select a field</option>
           {this.props.fields.map((field, index) => (
